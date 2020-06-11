@@ -3,19 +3,14 @@ Class {
 	#superclass : #DatabaseAccess,
 	#instVars : [
 		'databaseAccess',
-		'password'
+		'authSystem'
 	],
 	#category : #'TP6-Proxy'
 }
 
 { #category : #construction }
-DatabaseAccessProxy class >> password: aPassword [
-	^ self new password: aPassword
-]
-
-{ #category : #checking }
-DatabaseAccessProxy >> checkAccess [
-	^ password = 'DataBase2020'
+DatabaseAccessProxy class >> withAuthentication: anAuthenticationSystem [
+	^ self new withAuthentication: anAuthenticationSystem
 ]
 
 { #category : #testing }
@@ -25,23 +20,22 @@ DatabaseAccessProxy >> databaseAccess [
 
 { #category : #'as yet unclassified' }
 DatabaseAccessProxy >> getSearchResults: queryString [
-	self checkAccess
+	authSystem isLogged
 		ifTrue: [ ^ databaseAccess getSearchResults: queryString ]
 ]
 
 { #category : #initialization }
 DatabaseAccessProxy >> initialize [
-	databaseAccess := DatabaseRealAcess new.
-	password := ''
+	databaseAccess := DatabaseRealAcess new
 ]
 
 { #category : #'as yet unclassified' }
 DatabaseAccessProxy >> insertNewRow: rowData [
-	self checkAccess
+	authSystem isLogged
 		ifTrue: [ ^ databaseAccess insertNewRow: rowData ]
 ]
 
 { #category : #initialization }
-DatabaseAccessProxy >> password: aPassword [
-	password := aPassword
+DatabaseAccessProxy >> withAuthentication: anAuthenticationSystem [
+	authSystem := anAuthenticationSystem
 ]

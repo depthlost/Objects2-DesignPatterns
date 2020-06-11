@@ -10,8 +10,10 @@ Class {
 
 { #category : #running }
 DatabaseAccessProxyTestCase >> setUp [
-	successDatabase := DatabaseAccessProxy password: 'DataBase2020'.
-	errorDatabase := DatabaseAccessProxy password: 'DataBase2040'
+	successDatabase := DatabaseAccessProxy
+		withAuthentication: (AuthenticationSystem logged: true).
+	errorDatabase := DatabaseAccessProxy
+		withAuthentication: (AuthenticationSystem logged: false)
 ]
 
 { #category : #tests }
