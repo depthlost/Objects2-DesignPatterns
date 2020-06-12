@@ -10,7 +10,7 @@ Class {
 		'grande',
 		'backup2015'
 	],
-	#category : #'TP4-FileSystem-Tests-TP4-FileSystem-Tests'
+	#category : #'TP4-FileSystem-Tests'
 }
 
 { #category : #'as yet unclassified' }
